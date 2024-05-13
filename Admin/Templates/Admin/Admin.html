@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin page</title>
+</head>
+<body>
+    <h2 align="center" >Admin Registration</h2>
+    <form action="" method="POST" >
+        {% csrf_token %}
+        <table align="center" border="1">
+           
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txt_name" value=""></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="txt_email" value=""></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="txt_pass" value=""></td> 
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Save">
+                </td>  
+            </tr>
+        </table>    
+    </form>
+    <table align="center" border="1">
+        <tr>
+            <td>Sl.no</td>
+            <td>District</td>
+            <td>Email</td>
+            <td>Password</td>
+            <td>Action</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.admin_name}}</td>
+            <td>{{i.admin_email}}</td>
+            <td>{{i.admin_password}}</td>
+            <td>
+                <a href="{% url 'WebAdmin:deladmin' i.id %}">Delete</a>
+                <a href="{% url 'WebAdmin:adminUpdate' i.id %}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint</title>
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        h4 {
+            margin-top: 0;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 5px;
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <table border="1" align="center">
+        <tr>
+            <td>Title</td>
+            <td>Complaint</td>
+            <td>POST Date</td>
+            <td>Replay</td>
+            <td>Replay Date</td>
+        </tr>
+        <tr>
+            <td>{{ complaint.complaint_title }}</td>
+            <td>{{ complaint.complaint_details }}</td>
+            <td>{{ complaint.complaint_postdate }}</td>
+            <td>{{ complaint.complaint_reply }}</td>
+            <td>{{ complaint.complaint_replydate }}</td>
+        </tr>
+    </table>
+    <br><br>
+    <form action="" method="POST">
+        <h4>Post Reply</h4>
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>Reply</td>
+                <td><textarea name="txtreply" cols="20" rows="3"></textarea></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Save"></td>
+                <td><input type="submit" value="Cancel"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+</html>

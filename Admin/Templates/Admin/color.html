@@ -1,0 +1,70 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color</title>
+</head>
+<body>
+    <h1 align="center" >Color</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table align="center" border="1">
+
+            <tr>
+                <td>Metrial</td>
+                <td>
+                    <select name="sel_material" id="sel_material">
+                        <option value="">...Select...</option>
+                        {% for i in materialdata %}
+                        <option 
+                            {% if i.id == editdata.material_id %}
+                            selected
+                            {% endif %}
+                            value="{{i.id}}">
+                            {{i.material_name}}
+                        </option>
+                       {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Color</td>
+                <td>
+                    <input type="text" name="txtname" placeholder="Enter the color" required value="{{editdata.color_name}}">
+                </td>
+            </tr>
+            <tr >
+                <td><input type="submit" name="btn" value="Save"></td>
+                <td><input type="submit" name="btn" value="Cancel"></td>
+            </tr>
+        </table>
+    </form>
+        <table align="center" border="1">
+            <tr>
+                <td>Sl.no</td>
+                <td>Material</td>
+                <td>Color</td>
+                <td>Action</td>
+                    
+            </tr>
+                {% for i in data %}
+                <td>{{forloop.counter}}</td>
+                <td>{{i.material.material_name}}</td>
+                <td>{{i.color_name}}</td>
+                <td>
+                    <a href="{% url 'WebAdmin:delColor' i.id %}">DELETE</a>
+                    <a href="{% url 'WebAdmin:colorUpdate' i.id %}">EDIT</a>
+                </td>
+            </tr>
+                {% endfor %}
+        </table>
+        
+</body>
+</html>
+
+{% endblock content %}

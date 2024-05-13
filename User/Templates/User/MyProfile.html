@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container-fluid {
+            padding: 50px 0;
+        }
+
+        .d-bg-image {
+            background-image: url("your-background-image.jpg"); /* Replace "your-background-image.jpg" with the actual image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .d-profile {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .d-card {
+            width: 100%;
+            color: black;
+        }
+
+        .d-card td {
+            padding: 10px 0;
+        }
+
+        .d-card img {
+            display: block;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+
+        .d-card-button {
+            display: inline-block;
+            background-color: #1877f2;
+            color: #fff;
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        .d-card-button:hover {
+            background-color: #166fe5;
+        }
+        table {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        table td {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid d-bg-image">
+    <div class="d-profile">
+        <table align="center" cellpadding="10px" class="d-card">
+            <tr>
+                <td colspan="2" align="center"><img src="{{data.user_photo.url}}" alt="" width="150" height="150"></td>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td>{{data.user_name}}</td>
+            </tr>
+            <tr>
+                <td>Contact:</td>
+                <td>{{data.user_contact}}</td>
+            </tr>
+            <tr>
+                <td>Email: </td>
+                <td>{{data.user_email}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><a class="d-card-button" href="{% url 'User:editprofile' %}">Edit Profile</a></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><a class="d-card-button" href="{% url 'User:changepassword' %}">Change password</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

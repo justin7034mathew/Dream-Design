@@ -1,0 +1,95 @@
+{% extends 'Designer/head.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 60%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        tr:first-child {
+            background-color: #333;
+            color: #fff;
+        }
+
+        td:first-child {
+            width: 10%;
+        }
+
+        td:nth-child(2) {
+            width: 30%;
+        }
+
+        td:nth-child(3) {
+            width: 15%;
+        }
+
+        td:nth-child(4) {
+            width: 45%;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>User Review</h2>
+
+<table align="center" border="1">
+    <tr>
+        <th>Sl.no</th>
+        <th>Review</th>
+        <th>Rating</th>
+        <th>Comment</th>
+        <th>Chat section</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.review_name }}</td>
+        <td>{{ i.Rating_details }}</td>
+        <td>{{ i.Comment_details }}</td>
+        <td>
+            <a style="color: black; font-size: larger; font-weight: bold;" href="{% url 'Designer:chatpage' i.id %}">chat</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>userreview</title>
+</head>
+<body>
+    <h2 align="center">User Review</h2>
+    <table align="center" border="2">
+        <tr>
+            <td>Sl.no</td>
+            <td>Review</td>
+            <td>Rating</td>
+            <td>Comment</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.review_name  }}</td>
+            <td>{{ i.Rating_details }}</td>
+            <td>{{i.Comment_details }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

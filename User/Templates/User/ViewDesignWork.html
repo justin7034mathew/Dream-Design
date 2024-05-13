@@ -1,0 +1,213 @@
+{% extends 'User/Homepage.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design</title>
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #6c6e70;
+        margin: 0;
+        padding: 0;
+    }
+
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+        background-color: #fff;
+        border: 2px solid #ccc;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+    }
+
+    th {
+        background-color: #f0f0f0;
+    }
+
+    select, input[type="submit"] {
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+    }
+
+    input[type="submit"] {
+        background-color: #1877f2;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #166fe5;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+
+    .action-links a {
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+        color: #1877f2;
+        text-decoration: none;
+    }
+
+    .action-links a:hover {
+        text-decoration: underline;
+    }
+</style>
+<body>
+    <br><br><br><br>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table align="center" border="2">
+            <h2 align="center">View Design</h2>
+            <tr>
+                <td>Category</td>
+                <td>
+                    <select name="sel_category" id="sel_category">
+                        <option value="">...Select...</option>
+                        {% for i in categorydata %}
+                        <option 
+                            {% if i.id == editdata.category_id %}
+                            selected
+                            {% endif %}
+                            value="{{i.id}}">
+                            {{i.category_name}}
+                        </option>
+                       {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        <!-- #Subcatedory -->
+            <tr>
+                <td>Subcatedory</td>
+                <td>
+                    <select name="sel_subcategory" id="sel_subcategory">
+                        <option value="">...Select...</option>
+                        {% for i in subcategorydata %}
+                        <option 
+                            {% if i.id == editdata.subcategory_id %}
+                            selected
+                            {% endif %}
+                            value="{{i.id}}">
+                            {{i.subcategory_name}}
+                        </option>
+                       {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <!-- material -->
+            <tr>
+                <td>Material</td>
+                <td>
+                    <select name="sel_material" id="sel_material">
+                        <option value="">...Select...</option>
+                        {% for i in materialdata %}
+                        <option 
+                            {% if i.id == editdata.material_id %}
+                            selected
+                            {% endif %}
+                            value="{{i.id}}">
+                            {{i.material_name}}
+                        </option>
+                       {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <!-- Color -->
+            <tr>
+                <td>Color</td>
+                <td>
+                    <select name="sel_color" id="sel_color">
+                        <option value="">...Select...</option>
+                        {% for i in colordata %}
+                        <option 
+                            {% if i.id == editdata.color_id %}
+                            selected
+                            {% endif %}
+                            value="{{i.id}}">
+                            {{i.color_name}}
+                        </option>
+                       {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="txtbtn" value="Search">
+                    <input style="background: red;" type="submit" name="txtbtn" value="Cancel">
+                </td>
+            </tr>
+        </table>
+        <table align="center" border="2">
+            <tr>
+                <td>Sl.no</td>
+                <td>Designer Photo</td>
+                <td>Designer Name</td>
+                <td>Contact Designer</td>
+                <td>Work Image</td>
+                <td>Action</td>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><img src="{{i.designer.designer_photo.url}}" width="100" height="100" alt=""></td>      
+                <td>{{i.designer.designer_name}}</td>
+                <td>{{i.designer.designer_contact}}</td>
+                <td><img src="{{i.designerwork_photo.url}}" width="100" height="100" alt=""></td> 
+                <td>
+                    <a style="color: black; font-size: larger; font-weight: bold;" href="{% url 'User:chatpage' i.designer.id %}">chat</a> <br>
+                    <a style="color: black; font-size: larger; font-weight: bold;" href="{% url 'User:review' %}">Review</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#sel_category").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Designer:ajaxSubcategory' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#sel_subcategory").html(data);
+            },
+        });
+    });
+
+    $("#sel_material").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Designer:ajaxColor' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#sel_color").html(data);
+            },
+        });
+    });
+</script>
+
+{% endblock content %}

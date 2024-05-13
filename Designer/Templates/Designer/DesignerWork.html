@@ -1,0 +1,259 @@
+{% extends 'Designer/head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designer Workupload Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(116, 129, 134);
+            margin: 0;
+            padding: 0;
+        }
+
+        #tab {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #333;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        img {
+            display: block;
+            margin: auto;
+        }
+
+        input[type="text"],
+        textarea,
+        input[type="file"],
+        input[type="number"],
+        input[type="submit"] {
+            width: calc(40% - 20px);
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            align-items: center;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        input[type="file"] {
+            padding: 6px;
+        }
+    </style>
+
+</head>
+
+<body style="background-color: rgb(116, 129, 134)">
+    <br><br><br><br><br>
+    <div id="tab" align="center">
+    <h2 align="center">Designer Workupload Page</h2>
+    <form action="" method="POST"  enctype="multipart/form-data"  >
+        {% csrf_token %}
+        <table align="center" border="2">
+            <!-- category -->
+            <tr>
+                <td>Category</td>
+                <td>
+                    <select name="sel_category" id="sel_category">
+                        <option value="">...Select...</option>
+                        {% for i in categorydata %}
+                        <option 
+                            {% if i.id == editdata.category_id %}
+                            selected
+                            {% endif %}
+                            value="{{i.id}}">
+                            {{i.category_name}}
+                        </option>
+                       {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        <!-- #Subcatedory -->
+            <tr>
+                <td>Subcatedory</td>
+                <td>
+                    <select name="sel_subcategory" id="sel_subcategory">
+                        <option value="">...Select...</option>
+                        {% for i in subcategorydata %}
+                        <option 
+                            {% if i.id == editdata.subcategory_id %}
+                            selected
+                            {% endif %}
+                            value="{{i.id}}">
+                            {{i.subcategory_name}}
+                        </option>
+                       {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <!-- material -->
+            <tr>
+                <td>Material</td>
+                <td>
+                    <select name="sel_material" id="sel_material">
+                        <option value="">...Select...</option>
+                        {% for i in materialdata %}
+                        <option 
+                            {% if i.id == editdata.material_id %}
+                            selected
+                            {% endif %}
+                            value="{{i.id}}">
+                            {{i.material_name}}
+                        </option>
+                       {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <!-- Color -->
+            <tr>
+                <td>Color</td>
+                <td>
+                    <select name="sel_color" id="sel_color">
+                        <option value="">...Select...</option>
+                        {% for i in colordata %}
+                        <option 
+                            {% if i.id == editdata.color_id %}
+                            selected
+                            {% endif %}
+                            value="{{i.id}}">
+                            {{i.color_name}}
+                        </option>
+                       {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>Work Details</td>
+                <td>
+                    <textarea name="txtdet" id="" cols="30" rows="3"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>Work Images</td>
+                <td>
+                    <input type="file" name="fileImage" multiple="multiple" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Work Rate</td>
+                <td>
+                   <input type="number" name="txtrate" id="">
+                </td>
+            </tr>
+            <tr>
+                <td>Work Duration</td>
+                <td>
+                    <input type="number" name="txtdur" id="">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="" id="" value="Save">
+                    <input type="submit" name="" id="" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    
+        <table align="center" border="1">
+            {% csrf_token %}
+            <tr>
+                <td>Sl.no</td>
+                <td>Category</td>
+                <td>SubCategory</td>
+                <td>Material</td>
+                <td>Color</td>
+                <td>Work Details</td>
+                <td>Work Image</td>
+                <td>Work Rate</td>
+                <td>Work Duration</td>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.category.category_name}}</td>
+                <td>{{i.subcategory.subcategory_name}}</td>
+                <td>{{i.material.material_name}}</td>
+                <td>{{i.color.color_name}}</td>
+                <td>{{i.work_details}}</td>
+                <td><img src="{{i.designerwork_photo.url}}" width="100" height="100" alt=""></td> 
+                <td>{{i.designerwork_rate}}</td>
+                <td>{{i.designerwork_duration}}</td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    </form> 
+</div> 
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#sel_category").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Designer:ajaxSubcategory' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#sel_subcategory").html(data);
+            },
+        });
+    });
+
+    $("#sel_material").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Designer:ajaxColor' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#sel_color").html(data);
+            },
+        });
+    });
+</script>
+
+{% endblock content %}

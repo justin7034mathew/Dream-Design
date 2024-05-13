@@ -1,0 +1,85 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        td:last-child {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>Sl.No</th>
+        <th>Title</th>
+        <th>Complaint</th>
+        <th>POSTDate</th>
+        <th>UserName</th>
+        <th>Contact</th>
+        <th>Action</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.complaint_title}}</td>
+        <td>{{i.complaint_details}}</td>
+        <td>{{i.complaint_postdate}}</td>
+        <td>{{i.user.user_name}}</td>
+        <td>{{i.user.user_contact}}</td>
+        <td><a href="{% url 'WebAdmin:UserComplaintReply' cid=i.id %}">Reply</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
+
+{% endblock content %}

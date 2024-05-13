@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+</head>
+<body>
+<br><br>
+<form action="" method="POST">
+    <h2 align="center">Designer FeedBack</h2>
+    <table border="1" align="center">
+        <tr>
+           
+            <td>Sl.no</td>
+            <td>Subject</td>
+            <td>FeedBack</td>
+            <td>POSTDate</td>
+            <td>UserName</td>
+            <td>Contact</td>     
+            <td>Action</td>     
+        </tr>
+      {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.feedback_subject}}</td>
+            <td>{{i.feedback_details}}</td>
+            <td>{{i.feedback_postdate}}</td>
+            <td>{{i.user.user_name}}</td>
+            <td>{{i.user.user_contact}}</td>
+            <td>
+                <a href="{% url 'WebAdmin:DesignerFeedBackView' fid=i.id %}">View</a>
+            </td>
+            
+           
+        </tr>
+    {% endfor %}
+    </table>
+</form>
+</body>
+</html>

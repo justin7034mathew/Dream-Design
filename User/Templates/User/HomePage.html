@@ -1,0 +1,41 @@
+{% extends 'User/head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    a {
+        color: white;
+        align-items: center;   
+    }
+
+    h1 {
+        color: #ea9d9d;;
+    }
+    .main {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: #2e2222;
+        text-align: center;
+        padding: 50px 0;
+    }
+</style>
+<body style="background-color: rgb(64 65 73);">
+    <br><br><br><br><br>
+
+    <div class="main">
+        <a href="{% url 'User:my_pro' %}">Profile</a> <br>
+        <a href="{% url 'User:ViewDesignerwork' %}">Find Your Design</a> <br>
+        <a href="{% url 'User:POSTComplaint' %}">POSTComplaint</a> <br>
+        <a href="{% url 'User:UserFeedBack' %}">POSTFeedBack</a>
+    </div>
+
+</body>
+</html>
+
+{% endblock content %}

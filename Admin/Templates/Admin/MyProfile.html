@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .container-fluid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .d-profile {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .d-card {
+            width: 300px;
+            margin: 0 auto;
+           
+        }
+
+        .d-card img {
+            display: block;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+
+        .d-card table {
+            width: 100%;
+        }
+
+        .d-card td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .d-card-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .d-card-button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .d-card {
+                width: 90%;
+            }
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+            margin-right: 30px;
+        }
+
+        .center {
+          margin-left: 147px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="d-profile">
+            <table align="center" cellpadding="10px" class="d-card">
+               <tr >
+                <td class="center">
+                    <img style="margin-left: 147px;" src="/Assets/DesignerPhoto/-5854899577277232161_120.jpg" alt="">
+                </td>
+               </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{data.admin_name}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{data.admin_email}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><a class="d-card-button" href="{% url 'WebAdmin:editprofile' %}">Edit
+                            Profile</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <a class="d-card-button" href="{% url 'WebAdmin:changepassword' %}">Change password</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

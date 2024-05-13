@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint</title>
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+        margin: 0;
+        padding: 0;
+    }
+
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 50%;
+        background-color: #fff;
+        border: 2px solid #ccc;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    td {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"],
+    input[type="reset"] {
+        background-color: #1877f2;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover,
+    input[type="reset"]:hover {
+        background-color: #166fe5;
+    }
+</style>
+
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center" border="1">
+            <br><br>
+            <h2 align="center">Post Complaint</h2>
+            <tr>
+                <td>Title</td>
+                <td><input type="text" name="txttitle" placeholder="Enter Complaint Subject" required></td>
+            </tr>
+            <tr>
+                <td>Details</td>
+                <td>
+                    <textarea name="txtcomplaint" id="txtcomplaint" cols="20" rows="3"></textarea>
+                </td>
+            </tr>
+            <tr>
+                
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="Save">
+                    <input type="reset" name="btncancel" value="Cancel">
+                </td>
+            </tr>
+        </table>
+        <br><br>
+    </form>
+</body>
+</html>
+
+
+<table border="1" align="center">
+    <tr>
+        <td>Sl.No</td>
+        <td>Title</td>
+        <td>Complaint</td>
+        <td>POSTDate</td>
+        <td>Reply</td>
+        <td>ReplyDate</td>
+        <td>Action</td>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.complaint_title}}</td>
+        <td>{{i.complaint_details}}</td>
+        <td>{{i.complaint_postdate}}</td>
+        <td>{{i.complaint_reply}}</td>
+        <td>{{i.complaint_replydate}}</td>
+        <td>
+            <a href="{% url 'User:delComplaint' i.id %}">Delete</a>
+            
+        </td>
+    </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material</title>
+</head>
+<body>
+    <h1 align="center">Material</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table align="center" border="1">
+            <tr>
+                <td>Material</td>
+                <td>
+                    <input type="text" name="txtname" placeholder="Enter the Materials" value="{{editdata.material_name}}">
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Save"></td>
+                <td><input type="submit" value="Cancel"></td>
+            </tr>
+        </table>
+
+        <form>
+            <table align="center" border="1">
+                <tr>
+                    <td>Sl.no</td>
+                    <td>Material</td>
+                    <td>Action</td>
+                </tr>
+                {% for i in material %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td> {{i.material_name}} </td>  
+                    <td>
+                        <a href="{% url 'WebAdmin:delmaterial' i.id %}">DELETE</a>
+                        <a href="{% url 'WebAdmin:materialUpdate' i.id %}">EDIT</a>
+                    </td>              
+                </tr>
+                {% endfor %}
+            </table>
+        </form>
+    </form>
+</body>
+</html>

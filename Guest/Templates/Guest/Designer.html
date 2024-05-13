@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designer</title>
+</head>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designer Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="file"],
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="submit"]:last-child {
+            margin-left: 10px;
+            background-color: #ccc;
+        }
+
+        input[type="submit"]:last-child:hover {
+            background-color: #999;
+        }
+    </style>
+</head>
+<body>
+
+
+
+<div class="form">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            <h2 style="color: red; text-align: center;">Designer Registration</h2>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="disname" required placeholder="Enter your name" value=""></td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>
+                    <input type="radio" name="disgender" required value="Male">Male
+                    <input type="radio" name="disgender" required value="Female">Female
+                </td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td><input type="number" name="discontact" required placeholder="Enter your number" value=""></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><input type="email" name="disemail" required placeholder="Enter your email" value=""></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" name="dispwd" required placeholder="Enter your password" value=""></td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td><input type="file" name="fileImage" required></td>
+            </tr>
+            <tr>
+                <th>Proof</th>
+                <td><input type="file" name="fileProof" required></td>
+            </tr>
+            <!-- #district -->
+            <tr>
+                <th>District</th>
+                <td>
+                    <select name="sel_district" id="sel_district">
+                        <option value="">...Select...</option>
+                        {% for i in districtdata %}
+                        <option value="{{i.id}}">{{i.district_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <!-- #place -->
+            <tr>
+                <th>Place</th>
+                <td>
+                    <select name="sel_place" id="sel_place">
+                        <option value="">...Select...</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>      
+                <td colspan="2" align="center" style="text-align: center;" >
+                    <input type="submit" name="btnsubmit" value="Upload">
+                    <input type="submit" name="btncancel" style="background-color: red;" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#sel_district").change(function () {
+        var did = $(this).val();
+        var ur = "{% url 'Guest:ajaxplace' %}"
+        $.ajax({
+            url: ur,
+            data: { did: did, },
+            success: function (data) {
+                $("#sel_place").html(data);
+            },
+        });
+    });
+</script>
+

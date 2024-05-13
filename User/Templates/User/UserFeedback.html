@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+        margin: 0;
+        padding: 0;
+    }
+
+    table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+        background-color: #fff;
+        border: 2px solid #ccc;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+    }
+
+    th {
+        background-color: #f0f0f0;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"],
+    input[type="reset"] {
+        background-color: #1877f2;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover,
+    input[type="reset"]:hover {
+        background-color: #166fe5;
+    }
+
+    a {
+        color: #1877f2;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #166fe5;
+    }
+</style>
+
+<body>
+    <h3 align="center">FeedBack</h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table align="center" border="1">
+            <tr>
+                <td>Subject</td>
+                <td><input type="text" name="txtsubject" id=""></td>
+            </tr>
+            <tr>
+                <td>Details</td>
+                <td><textarea name="txtdetails" id="" cols="20" rows="3"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="" id="" value="Save">
+                    <input type="submit" name="" id="" value="Cancel">
+                </td>
+                
+            </tr>
+        </table>
+
+        <table border="1" align="center">
+            <tr>
+                <td>Sl.no</td>
+                <td>Subject</td>
+                <td>Detail</td>
+                <td>POSTDate</td>
+                <td>Action</td>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.feedback_subject}}</td>
+                <td>{{i.feedback_details}}</td>
+                <td>{{i.feedback_postdate}}</td>
+                <td>
+                    <a href="{% url 'User:delComplaint' i.id %}">Delete</a>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

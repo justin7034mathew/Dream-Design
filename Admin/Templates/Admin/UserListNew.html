@@ -1,0 +1,53 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="Post">
+        <table align="center" border="1">
+            <tr>
+                <td>Sl.no</td>
+                <td>Name</td>
+                <td>Gender</td>
+                <td>Contact</td>
+                <td>Email</td>
+                <td>Password</td>
+                <td>Photo</td>
+                <td>Proof</td>
+                <td>District</td>
+                <td>Place</td>
+                <td>Action</td>
+            </tr>
+
+            {% for i in userdata %}
+            <tr>
+                
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.user_name }}</td>
+                <td>{{ i.user_gender}}</td>
+                <td>{{ i.user_contact}}</td>
+                <td>{{ i.user_email}}</td>
+                <td>{{ i.user_password}}</td>
+                <td><img src="{{i.user_photo.url}}" width="150" height="150" alt=""></td>
+                <td><img src="{{i.user_proof.url}}" width="150" height="150" alt=""></td>
+                <td>{{ i.place.district.district_name}}</td>
+                <td>{{ i.place.place_name}}</td>       
+                <td>
+                    <a href="{% url 'WebAdmin:acceptuser' i.id %}">Accept</a>
+                    <a href="{% url 'WebAdmin:rejectuser' i.id %}">Reject</a>
+                </td>     
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+
+{% endblock content %}

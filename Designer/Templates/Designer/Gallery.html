@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+</head>
+<body>
+    <h2 align="center">Gallery</h2>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center" border="2" >
+            <tr>
+                <td>Gallery File</td>
+                <td>
+                    <input type="file" name="txtgallery" multiple="multiple" id="">
+                </td>
+            </tr>
+            <tr>
+                <td>Gallery Caption</td>
+                <td>
+                    <input type="text" name="txtcap" id="">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" name="txtsubmit" id="" value="Save">
+                    <input type="submit" name="txtsubmit" id="" value="Cancel">
+                </td>
+                
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

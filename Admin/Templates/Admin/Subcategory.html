@@ -1,0 +1,71 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subcategory</title>
+</head>
+<body>
+    <h3 align="center">Subcategory</h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table align="center" border="2">
+            <tr>
+                <td>Category</td>
+                <td>
+                    <select name="sel_category" id="sel_category">
+                        <option value="">...Select...</option>
+                        {% for i in categorydata %}
+                        <option 
+                            {% if i.id == editdata.category_id %}
+                            selected
+                            {% endif %}
+                            value="{{i.id}}">
+                            {{i.category_name}}
+                        </option>
+                       {% endfor %}
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>SubCategoryName</td>
+                <td><input type="text" name="txtname" value=""></td>
+            </tr>
+            <tr> 
+                <td colspan="2">
+                    <input type="submit" name="btn" value="Save">
+                    <input type="submit" name="btn" value="Cancel">
+                </td>
+                
+            </tr>
+        </table>
+    </form>
+
+    <table align="center" border="1" >
+        <tr>
+            <th>Sl.no</th>
+            <th>Category</th>
+            <th>SubCategory</th>
+            <th>Action</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.category.category_name}}</td>
+            <td>{{i.subcategory_name}}</td>
+            <td>
+                <a href="{% url 'WebAdmin:delSubcategory' i.id %}">DELETE</a>
+                <a href="{% url 'WebAdmin:UpdateSubcategory' i.id %}">EDIT</a>
+            
+            </td>
+           
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}

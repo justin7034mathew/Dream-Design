@@ -1,0 +1,50 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 align="center">Category</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table align="center" border="1">
+            <tr>
+                <td>Category</td>
+                <td>
+                    <input type="text" name="txtname" placeholder="Enter category" required value="{{editdata.category_name}}">
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2">
+                    <input type="submit" id="btn" value="Save">
+                <input type="submit" id="btn" value="Cancel"></td>
+            </tr>
+        </table>
+    </form>
+    <table align="center" border="1">
+        <tr>
+            <td>Sl.no</td>
+            <td>Category</td>
+            <td>Action</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.category_name}}</td>
+            <td>
+                <a href="{% url 'WebAdmin:delCategory' i.id %}">DELETE</a>
+                <a href="{% url 'WebAdmin:categoryUpdate' i.id %}">EDIT</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+</head>
+<body>
+
+    <style>
+        .container-fluid {
+    padding: 20px; /* Adjust padding as needed */
+}
+
+.d-bg-image {
+    background-image: url('your-background-image-url.jpg'); /* Set your background image */
+    background-size: cover;
+    background-position: center;
+}
+
+.d-profile {
+    margin-top: 20px; /* Adjust margin as needed */
+}
+
+.d-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.textbox {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.d-card-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.d-card-button:hover {
+    background-color: #45a049;
+}
+
+    </style>
+    <div class="container-fluid d-bg-image">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="d-profile">
+            <table class="d-card" style="color: black;" align="center" cellpadding="10px">
+                <tr> 
+                    <td>Name</td>
+                    <td><input type="text" class="textbox" name="txtname" id="" value="{{prodata.admin_name}}"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="txtemail" class="textbox" id="" value="{{prodata.admin_email}}"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input class="d-card-button" type="submit" value="Update" name="btnsub"></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    </div>
+    {% if msg %}
+    <script>
+        alert("{{msg}}")
+        window.location = "{% url 'WebAdmin:my_pro' %}"
+    </script>
+    {% endif %}
+</body>
+</html>

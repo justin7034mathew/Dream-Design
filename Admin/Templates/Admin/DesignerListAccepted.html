@@ -1,0 +1,101 @@
+{% extends 'Admin/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designer Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th>Sl.no</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Photo</th>
+                    <th>Proof</th>
+                    <th>District</th>
+                    <th>Place</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in designerdata %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.designer_name }}</td>
+                    <td>{{ i.designer_gender }}</td>
+                    <td>{{ i.designer_contact }}</td>
+                    <td>{{ i.designer_email }}</td>
+                    <td>{{ i.designer_password }}</td>
+                    <td><img src="{{ i.designer_photo.url }}" width="150" height="150" alt=""></td>
+                    <td><img src="{{ i.designer_proof.url }}" width="150" height="150" alt=""></td>
+                    <td>{{ i.place.district.district_name }}</td>
+                    <td>{{ i.place.place_name }}</td>
+                    <td>
+                        <a href="{% url 'WebAdmin:rejectdesigner' i.id %}">Reject</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+</body>
+</html>
+
+
+{% endblock content %}
